@@ -1,27 +1,27 @@
-## required packages
+## Required packages
 
 library(ggpubr)
 library(dplyr)
 
-# Seu dado já carregado em my_data
+# Load data
 
 my_data <- read.csv('example.csv')
 
 
-# linear regression
+# Linear regression
 
 linear_model <- lm(prey ~ predator, data = my_data)
 slope <- round(coef(linear_model)[2], 2)
 r2 <- round(summary(linear_model)$r.squared, 2)
 
-# pearson cor scatterplot 
+# Pearson cor scatterplot 
 
 p1 <- ggscatter(my_data, x = "predator", y = "prey", 
                 conf.int = TRUE, 
                 cor.coef = TRUE, cor.method = "pearson",
                 xlab = "Predator TTL size", ylab = "Prey TTL size")
 
-# linear regression scatterplot
+# Linear regression scatterplot
 
 p2 <- ggscatter(my_data, x = "predator", y = "prey", 
                 add = "reg.line", conf.int = TRUE,
@@ -33,8 +33,8 @@ p2 <- ggscatter(my_data, x = "predator", y = "prey",
            size = 4)
 
 
-## now the boxplots 
-## filtering by Family with at least 5 records
+## Boxplots
+## filtered by Family with at least 5 records
 
 my_data_filtrado <- my_data %>%
   group_by(Family) %>%
